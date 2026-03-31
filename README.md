@@ -1,5 +1,44 @@
+<div align="center">
+
 # Form → Google Sheets Workflow
 A lightweight, backend-free form submission pipeline using Google Apps Script and Google Sheets. Designed for sites that need simple data collection without standing up a full server, or users who need a way to access collected data without server knowledge.
+
+</div>
+
+
+## Key features
+- No hosting required
+- Immediate integration with Google Sheets
+- Accepts custom built forms (not just Google Forms)
+- Works well for low to moderate traffic use cases 
+- Data is normalized and sorted before rendering
+
+
+## Tech stack
+### Front-end
+- HTML/CSS
+- Javascript
+- Fetch API
+### Back-end (serverless)
+- Google Apps Script  
+Acts as:
+- Request handler
+- Data processor
+- Write layer to Sheets
+### Database
+- Google Sheets  
+Used as:
+- Lightweight data storage
+### API layer (read)
+- Google Sheets API (REST)  
+Used for:
+- Fetching data
+- Rendering submssions on the front end
+### Infrastructure
+- Hosting on your site
+- Google Cloud 
+
+
 
 ## Usage
 ### 1. Set up your Google Sheet
@@ -63,6 +102,7 @@ const apiKey = "yourapikeyhere";
 const scriptURL = "yourscripturlhere";
 ```
 3. Modify the `formData` keys in `submit.js` to match the column headers you made in step 1. 
+
 Example:
 ```
 const formData = {
@@ -84,41 +124,12 @@ import {
 } from "./submit.js";
 ```
 
+
 ### Notes
 - Field names must match sheet headers exactly
 - Requests must use GET (to avoid CORS preflight issues)
 - This setup is best for simple, unauthenticated submissions
 
-## Key Decisions
-### 1. No Traditional Backend
-Instead of using a server (Node, PHP, etc.), this uses Google Apps Script as a lightweight backend.
-
-- No hosting required  
-- Easy integration with Google Sheets  
-- Works well for low to moderate traffic use cases  
-
-### 2. GET Requests Instead of POST
-Form data is sent via query parameters.
-
-- Avoids CORS preflight issues  
-- Works reliably with Apps Script web apps  
-- Keeps requests simple and predictable  
-
-### 3. Data Normalization
-Input is cleaned and standardized before rendering:
-- Trimming whitespace  
-- Normalizing capitalization  
-- Converting special characters  
-- Formatting output consistently  
-
-This ensures consistent display even with messy user input.
-
-### 4. Matching Data Structure
-Frontend keys match Google Sheet headers exactly.
-
-- Eliminates mapping logic  
-- Keeps data flow simple  
-- Reduces risk of mismatched fields  
 
 ## Files
 ```
