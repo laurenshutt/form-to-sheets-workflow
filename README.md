@@ -1,22 +1,53 @@
 # Form → Google Sheets Workflow
 A lightweight, backend-free form submission pipeline using Google Apps Script and Google Sheets. Designed for static sites that need simple data collection without standing up a full server.
 
-
 ## Overview
 This project captures form submissions, stores them in a Google Sheet, and renders the data dynamically on a website.
 
 It was built with a focus on simplicity, reliability, and clean data handling.
 
+## Usage
+### 1. Set up the Google Sheet
+- Create a Google Sheet
+- Add a header row (these must match your form field names exactly)
 
-## How It Works
-1. A user submits a form on the frontend  
-2. The form data is sent via a simple GET request  
-3. Google Apps Script receives and processes the data  
-4. The data is written to a Google Sheet  
-5. The frontend fetches and displays the stored data  
+Example:
+```
+Timestamp |	Honorific | First name | Last name | Title | Email
+```
+
+### 2. Set up Google Apps Script
+- Open **Extensions → Apps Script** in your sheet
+- Paste in `Code.gs`
+- Deploy as a web app:
+```
+Execute as: Me
+Who has access: Anyone
+```
+- Copy the `/exec` URL
+
+### 3. Submit data from the frontend
+```
+js
+const params = new URLSearchParams(formData);
+
+fetch(`${SCRIPT_URL}?${params}`)
+  .then(res => res.json())
+  .then(data => {
+    // handle success
+  });
+```
+
+### 4. Fetch and render data
+
+Use the Google Sheets API or your preferred method to read and display stored entries.
+
+### Notes
+Field names must match sheet headers exactly
+Requests must use GET (to avoid CORS preflight issues)
+This setup is best for simple, unauthenticated submissions
 
 ## Key Decisions
-
 ### 1. No Traditional Backend
 Instead of using a server (Node, PHP, etc.), this uses Google Apps Script as a lightweight backend.
 
