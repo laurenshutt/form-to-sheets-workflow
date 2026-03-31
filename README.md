@@ -25,6 +25,8 @@ A lightweight, backend-free form submission pipeline using Google Apps Script an
 - Google Sheets API (data retrieval)
 
 
+## Example
+🇺🇦 [https://isec.catholic.edu/an-appeal-to-stop-religious-persecution-in-russian-occupied-ukraine/](https://isec.catholic.edu/an-appeal-to-stop-religious-persecution-in-russian-occupied-ukraine/)
 
 ## Usage
 ### 1. Set up your Google Sheet
