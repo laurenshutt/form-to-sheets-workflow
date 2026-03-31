@@ -14,7 +14,7 @@ It was built with a focus on simplicity, reliability, and clean data handling.
 ### 2. Make your sheet public (read access)
 - Open your Google Sheet
 - Click **Share**
-- Set to **Anyone with the link → Viewer**
+- Set to **Anyone with the link → Viewer**  
 Example:
 ```
 Timestamp |	Honorific | First name | Last name | Title | Email
