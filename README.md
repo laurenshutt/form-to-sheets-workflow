@@ -37,6 +37,12 @@ Timestamp |	Honorific | First name | Last name | Title | Email
 ```
 **Tip:** You can [freeze the header row](https://support.google.com/docs/answer/9060449) to make scrolling easier.
 
+3. Copy your spreadsheet ID and save it. You can find your ID in the spreadsheet URL:
+```
+https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit?gid=SHEET_ID#gid=SHEET_ID
+```
+4. Copy and save the name of the sheet (the name of the sheet in the spreadsheet, not the spreadsheet itself) where you working. The default name is `Sheet1`.
+
 
 ### 2. Make your Google sheet public
 1. Click [**Share**](https://support.google.com/docs/answer/2494822)
@@ -79,13 +85,15 @@ Tip: Asterisks (*) indicate all pages underneath the domain
 
 
 ### 5. Modify and import the front-end functions
-1. Add your API key to `render.js` 
+1. Add your spreadsheet ID, the name of the sheet in your spreadsheet, and your API key to `render.js` 
 ```
+const spreadsheetId = "yourspreadsheetidhere";
+const tab = "yourtabname";
 const apiKey = "yourapikeyhere";
 ```
 2. Add your Google Script URL to `submit.js`
 ```
-const scriptURL = "yourscripturlhere";
+const scriptUrl = "yourscripturlhere";
 ```
 3. Modify the `formData` keys in `submit.js` to match the column headers you made in step 1. 
 
