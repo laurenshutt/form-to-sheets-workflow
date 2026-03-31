@@ -8,8 +8,8 @@ It was built with a focus on simplicity, reliability, and clean data handling.
 
 ## Usage
 ### 1. Set up your Google Sheet
-- Create a [Google Sheet](https://sheets.google.com)
-- Add a header row with the information you intend to collect from the form
+1. Create a [Google Sheet](https://sheets.google.com)
+2. Add a header row with the information you intend to collect from the form
 
 Example:
 ```
@@ -17,60 +17,62 @@ Timestamp |	Honorific | First name | Last name | Title | Email
 ```
 **Tip:** You can [freeze the header row](https://support.google.com/docs/answer/9060449) to make scrolling easier.
 
-### 2. Make your sheet public (read access)
-- Open your Google Sheet
-- Click [**Share**](https://support.google.com/docs/answer/2494822)
-- Set to **Anyone with the link → Viewer**
+### 2. Make your sheet public
+1. Click [**Share**](https://support.google.com/docs/answer/2494822)
+2. Set to **Anyone with the link → Viewer**
 
 ### 3. Set up Google Apps Script
-- Open **Extensions → Apps Script** in your sheet
-- Name the script and paste in `Code.gs`
-- Click **[Deploy](https://developers.google.com/apps-script/concepts/deployments) → New deployment**
-- Give the deployment a description (e.g., `Initial deployment`)
-- Under **Execute as** select **Me**
-- Under **Who has access** select **Anyone**
-- Click **Deploy**
-- Copy the URL
+1. Open **Extensions → Apps Script** in your sheet
+2. Name the script and paste in `Code.gs`
+3. Click **[Deploy](https://developers.google.com/apps-script/concepts/deployments) → New deployment**
+4. Give the deployment a description (e.g., `Initial deployment`)
+5. Under **Execute as** select **Me**
+6. Under **Who has access** select **Anyone**
+7. Click **Deploy**
+8. Copy and save the URL
 
-### 4. Get a Google Sheets API Key
+### 4. Create an API key
+#### 4a. Create or open a Google Cloud Console Project
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project (or select an existing one)
-#### Enable the Google Sheets API
+2. [Create a new project](https://developers.google.com/workspace/guides/create-project) (or select an existing one)
+#### 4b. Enable the Google Sheets API
 3. Go to **APIs & Services → Library**
 4. Search for **Google Sheets API**
 5. Click **Enable**
-#### Create an API Key
+#### 4c. Create the key
 6. Go to **APIs & Services → Credentials**
 7. Click **Create Credentials → API Key**
 8. Name your API key and select **Google Sheets API** under **Select API restrictions**
-
-#### Restrict the API Key (recommended but not required)
-8a. Under **Application restrictions** select **Websites**
-8b. Under **Website restrictions** click **Add**
-8c. In the **Website** field enter your domain (e.g., `https://yourdomain.com/*`)  
+#### Optional: Restrict the API Key (recommended but not required)
+9. Under **Application restrictions** select **Websites**
+10. Under **Website restrictions** click **Add**
+11. In the **Website** field enter your domain (e.g., `https://yourdomain.com/*`)  
 **Tip:** Asterisks (*) indicate all pages underneath the domain
-9. Click **Create** to create and save the key.
-10. On the Credentials page, click **Show key** to the right of the API key you just created
-11. Copy your API key
+12. Click **Create** to create and save the key.
+13. On the Credentials page, click **Show key** to the right of the API key you just created
+14. Copy your API key
 
-
-
-### 5. Submit data from the frontend
+### 5. Modify and import the front-end functions
+1. Add your API key to `render.js` 
 ```
-const params = new URLSearchParams(formData);
+const apiKey = "yourapikeyhere";
 
-fetch(`${SCRIPT_URL}?${params}`)
-  .then(res => res.json())
-  .then(data => {
-    // handle success
-  });
+```
+2. Add your Google Script URL to `submit.js`
+```
+const scriptURL = "yourscripturlhere";
+
+```
+3. Import `render.js` and `submit.js`
+```
+const scriptURL = "yourscripturlhere";
+
 ```
 
 ### Notes
-Field names must match sheet headers exactly
-Requests must use GET (to avoid CORS preflight issues)
-This setup is best for simple, unauthenticated submissions
-
+- Field names must match sheet headers exactly
+- Requests must use GET (to avoid CORS preflight issues)
+- This setup is best for simple, unauthenticated submissions
 
 ## Key Decisions
 ### 1. No Traditional Backend
