@@ -7,31 +7,32 @@ This project captures form submissions, stores them in a Google Sheet, and rende
 It was built with a focus on simplicity, reliability, and clean data handling.
 
 ## Usage
-### 1. Set up the Google Sheet
+### 1. Set up your Google Sheet
 - Create a [Google Sheet](https://sheets.google.com)
-- Add a header row (these must match your form field names exactly)
+- Add a header row with the information you intend to collect from the form
 
-### 2. Make your sheet public (read access)
-- Open your Google Sheet
-- Click **Share**
-- Set to **Anyone with the link → Viewer**  
 Example:
 ```
 Timestamp |	Honorific | First name | Last name | Title | Email
 ```
 **Tip:** You can [freeze the header row](https://support.google.com/docs/answer/9060449) to make scrolling easier.
 
+### 2. Make your sheet public (read access)
+- Open your Google Sheet
+- Click [**Share**](https://support.google.com/docs/answer/2494822)
+- Set to **Anyone with the link → Viewer**
+
 ### 3. Set up Google Apps Script
 - Open **Extensions → Apps Script** in your sheet
-- Paste in `Code.gs`
-- Deploy as a web app:
-```
-Execute as: Me
-Who has access: Anyone
-```
-- Copy the `/exec` URL
+- Name the script and paste in `Code.gs`
+- Click **[Deploy](https://developers.google.com/apps-script/concepts/deployments) → New deployment**
+- Give the deployment a description (e.g., `Initial deployment`)
+- Under **Execute as** select **Me**
+- Under **Who has access** select **Anyone**
+- Click **Deploy**
+- Copy the URL
 
-### 4. Get a Google Sheets API Key (for reading data)
+### 4. Get a Google Sheets API Key
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project (or select an existing one)
 #### Enable the Google Sheets API
@@ -43,13 +44,11 @@ Who has access: Anyone
 7. Click **Create Credentials → API Key**
 8. Name your API key and select **Google Sheets API** under **Select API restrictions**
 
-#### Restrict the API Key (recommended)
+#### Restrict the API Key (recommended but not required)
 8a. Under **Application restrictions** select **Websites**
 8b. Under **Website restrictions** click **Add**
-8c. In the **Website** field enter your domain:
-```
-https://yourdomain.com/*
-```
+8c. In the **Website** field enter your domain (e.g., `https://yourdomain.com/*`)  
+**Tip:** Asterisks (*) indicate all pages underneath the domain
 9. Click **Create** to create and save the key.
 10. On the Credentials page, click **Show key** to the right of the API key you just created
 11. Copy your API key
@@ -66,10 +65,6 @@ fetch(`${SCRIPT_URL}?${params}`)
     // handle success
   });
 ```
-
-### 4. Fetch and render data
-
-Use the Google Sheets API or your preferred method to read and display stored entries.
 
 ### Notes
 Field names must match sheet headers exactly
