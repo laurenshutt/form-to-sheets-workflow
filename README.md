@@ -85,10 +85,10 @@ Tip: Asterisks (*) indicate all pages underneath the domain
 
 
 ### 5. Modify and import the front-end functions
-1. Add your spreadsheet ID, the name of the sheet in your spreadsheet, and your API key to `render.js` 
+1. Add your spreadsheet ID, the name of the sheet in your spreadsheet, and your API key to `front-end/render.js` and `apps-script/code.gs`
 ```
 const spreadsheetId = "yourspreadsheetidhere";
-const tab = "yourtabname";
+const sheet = "yoursheetname";
 const apiKey = "yourapikeyhere";
 ```
 2. Add your Google Script URL to `submit.js`

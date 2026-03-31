@@ -1,11 +1,16 @@
 //Add your values here
 const spreadsheetId = "yourspreadsheetidhere";
-const tab = "yourtabname";
+const sheet = "yoursheetname";
 const apiKey = "yourapikeyhere";
 
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${tab}?key=${apiKey}`;
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheet}?key=${apiKey}`;
 const container = "";
 let signatories = {};
+
+import {
+    normalizeCaps,
+    normalizeString
+} from "./utils";
 
 fetch(url)
     .then(res => res.json())
@@ -38,6 +43,7 @@ fetch(url)
 
                 if (entry.length <= 1) return;
 
+                //You may need to modify this switch depending on your data
                 switch (true) {
                     case index < 2:
                         html += `${entry} `;
