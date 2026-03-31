@@ -47,5 +47,5 @@ function handleResponse(e) {
 }
 
 function setup() {
-    SCRIPT_PROP.setProperty("key", apiKeys);
+    SCRIPT_PROP.setProperty("key", apiKey);
 }
