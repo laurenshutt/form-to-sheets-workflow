@@ -12,68 +12,71 @@ import {
     normalizeString
 } from "./utils";
 
-fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        
-        const submissions = data.values;
+export const render = (() => {
 
-        for (let s = 1; s < submissions.length; s++) {
-        
-            const submission = submissions[s];
-            const approved = submission[9];
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            
+            const submissions = data.values;
 
-            if (!approved) continue;
+            for (let s = 1; s < submissions.length; s++) {
+            
+                const submission = submissions[s];
+                const approved = submission[9];
 
-            const honorific = submission[1];
-            const first = submission[2];
-            const last = submission[3];
-            const postnominals = submission[4];
-            const institution = submission[6];
+                if (!approved) continue;
 
-            const key = normalizeString(last) + normalizeString(first);
+                const honorific = submission[1];
+                const first = submission[2];
+                const last = submission[3];
+                const postnominals = submission[4];
+                const institution = submission[6];
 
-            const signatory = [honorific, first, last, postnominals, institution];
+                const key = normalizeString(last) + normalizeString(first);
 
-            let html = "";
+                const signatory = [honorific, first, last, postnominals, institution];
 
-            signatory.forEach((entry, index) => {
-                
-                entry = normalizeCaps((entry || "").trim());
+                let html = "";
 
-                if (entry.length <= 1) return;
+                signatory.forEach((entry, index) => {
+                    
+                    entry = normalizeCaps((entry || "").trim());
 
-                //You may need to modify this switch depending on your data
-                switch (true) {
-                    case index < 2:
-                        html += `${entry} `;
-                        break;
+                    if (entry.length <= 1) return;
 
-                    case index === 2:
-                        html += `${entry}`;
-                        break;
+                    //You may need to modify this switch depending on your data
+                    switch (true) {
+                        case index < 2:
+                            html += `${entry} `;
+                            break;
 
-                    case index === 3:
-                        html += `, ${entry}`;
-                        break;
+                        case index === 2:
+                            html += `${entry}`;
+                            break;
 
-                    case index > 3:
-                        html += `<br/>${entry}`;
-                        break;
-                }
-            });
+                        case index === 3:
+                            html += `, ${entry}`;
+                            break;
 
-            signatories[key] = html;
-        }
-    })
-    .catch(err => console.error(err));
+                        case index > 3:
+                            html += `<br/>${entry}`;
+                            break;
+                    }
+                });
 
-signatories = Object.fromEntries(
-    Object.entries(signatories).sort()
-);
+                signatories[key] = html;
+            }
+        })
+        .catch(err => console.error(err));
 
-Object.keys(signatories).forEach(function(signatory){
-    const p = document.createElement("p");     
-    p.innerHTML = signatories[signatory];
-    container.appendChild(p);
-}); 
+    signatories = Object.fromEntries(
+        Object.entries(signatories).sort()
+    );
+
+    Object.keys(signatories).forEach(function(signatory){
+        const p = document.createElement("p");     
+        p.innerHTML = signatories[signatory];
+        container.appendChild(p);
+    }); 
+})();
