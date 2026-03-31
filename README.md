@@ -20,7 +20,6 @@ It was built with a focus on simplicity, reliability, and clean data handling.
 ### 1. No Traditional Backend
 Instead of using a server (Node, PHP, etc.), this uses Google Apps Script as a lightweight backend.
 
-**Why:**
 - No hosting required  
 - Easy integration with Google Sheets  
 - Works well for low to moderate traffic use cases  
@@ -28,7 +27,6 @@ Instead of using a server (Node, PHP, etc.), this uses Google Apps Script as a l
 ### 2. GET Requests Instead of POST
 Form data is sent via query parameters.
 
-**Why:**
 - Avoids CORS preflight issues  
 - Works reliably with Apps Script web apps  
 - Keeps requests simple and predictable  
@@ -45,23 +43,12 @@ This ensures consistent display even with messy user input.
 ### 4. Matching Data Structure
 Frontend keys match Google Sheet headers exactly.
 
-**Why:**
 - Eliminates mapping logic  
 - Keeps data flow simple  
 - Reduces risk of mismatched fields  
 
-### 5. Modular JavaScript
-Logic is separated into focused pieces:
-- Submission handling  
-- Data normalization  
-- Rendering  
-
-**Why:**
-- Easier to maintain  
-- Easier to test and reuse  
-- Clear separation of concerns  
-
 ## Files
+```
 frontend/
 submit.js // handles form submission
 render.js // fetches and displays data
@@ -71,3 +58,4 @@ Code.gs // writes submissions to Google Sheets
 
 utils/
 normalize.js // cleans and formats input data
+```
