@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./favicon.svg" alt="Form to Sheets Workflow" width="700" />
+<img src="./favicon.svg" alt="Form to Sheets Workflow" style="width:60px" />
 
 # Form → Google Sheets Workflow
 A lightweight, backend-free form submission pipeline using Google Apps Script and Google Sheets. Designed for sites that need simple data collection without standing up a full server, or users who need a way to access collected data without server knowledge.
